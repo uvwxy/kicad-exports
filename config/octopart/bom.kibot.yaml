@@ -1,0 +1,34 @@
+kibot:
+  version: 1
+
+preflight:
+  update_xml: true
+
+outputs:
+  - name: 'https://octopart.com/'
+    comment: 'bom.csv'
+    type: 'kibom'
+    dir: 'gerbers'
+    options:
+      conf:
+        number_rows: false
+        columns: 
+         - Description
+         - Part
+         - References
+         - Value
+         - field: Quantity Per PCB
+           name: Qty
+        hide_pcb_info: true
+        exclude_any:
+          - column: Part
+            regex: TestPoint
+          - column: Part
+            regex: LOGO
+          - column: Part
+            regex: Jumper
+      format: 'CSV'
+      number: 1
+      output: '%f.%x'
+      separator: ';'
+

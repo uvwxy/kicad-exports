@@ -5,7 +5,7 @@ preflight:
   run_erc: true
   run_drc: true
   check_zone_fills: true
-  ignore_unconnected: false
+  ignore_unconnected: true
 
 outputs:
   - name: 'print schema'
@@ -13,14 +13,14 @@ outputs:
     type: pdf_sch_print
     dir: docs
     options:
-      output: '%p-Schematic_%r.%x'
+      output: '%p-Schematic.%x'
 
   - name: 'print schema'
     comment: "Print schematic (SVG)"
     type: svg_sch_print
-    dir: docs
+    dir: docs/img
     options:
-      output: '%p-Schematic_%r.%x'
+      output: '%p-Schematic.%x'
 
   - name: 'print board'
     comment: "Print board (PDF)"
@@ -28,4 +28,4 @@ outputs:
     layers: 'user'
     dir: docs
     options:
-      output: '%p-Board_%r.%x'
+      output: '%p-Board.%x'
