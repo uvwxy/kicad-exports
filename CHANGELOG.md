@@ -26,3 +26,8 @@ V2.1
 - enable verbose output in CI runs
 - add codefactor.io
 - fix file permissions
+
+V2.2
+- make verbose optional again
+- refactor all config files
+- run several configs at once
