@@ -14,6 +14,7 @@ SCHEMA=""
 SKIP=""
 DIR=""
 OVERWRITE=""
+VERBOSE=""
 
 # Exit error code
 EXIT_ERROR=1
@@ -122,7 +123,7 @@ function args_process {
     do
         case "$1" in
             -c | --config ) shift
-                CONFIG="$1"
+                CONFIG="$@"
                 ;;
             -b | --board ) shift
                 BOARD="-b $1"
@@ -150,22 +151,16 @@ function args_process {
                 version
                 exit
                 ;;
-            *)
-                illegal_arg "$@"
-                exit $EXIT_ERROR
-                ;;
+#            *)
+#                illegal_arg "$@"
+#                exit $EXIT_ERROR
+#                ;;
         esac
         shift
     done
 }
 
 function run {
-    CONFIG="$(echo "$CONFIG" | tr -d '[:space:]')"
-
-    if [ $CI ]; then
-        VERBOSE="-v"
-    fi
-
     if [ -d .git ]; then
         filter="/opt/git-filters/kicad-git-filters.py"
         if [ -f $filter ]; then
@@ -175,15 +170,19 @@ function run {
         fi
     fi
 
-    if [ -f $CONFIG ]; then
-        kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
-    elif [ -f "/opt/kibot/config/$CONFIG" ]; then
-        kibot -c /opt/kibot/config/$CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
-    else
-        echo "config file '$CONFIG' not found! Please pass own file or choose from:"
-        ls /opt/kibot/config/*.yaml
-        exit $EXIT_ERROR
-    fi 
+    for conf in $CONFIG; do
+        if [ -f $conf ]; then
+            echo "running: kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+            kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+        elif [ -f "/opt/kibot/config/$conf" ]; then
+            echo "running: kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+            kibot -c /opt/kibot/config/$conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+        else
+            echo "config file '$conf' not found! Please pass own file or choose from:"
+            ls /opt/kibot/config/*.yaml
+            exit $EXIT_ERROR
+        fi
+    done
 }
 
 function main {
