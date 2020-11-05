@@ -5,8 +5,9 @@ preflight:
   update_xml: true
 
 outputs:
+  # For more information: https://github.com/INTI-CMNB/KiBoM
   - name: 'https://octopart.com/'
-    comment: 'bom.csv'
+    comment: 'bom.csv - octopart'
     type: 'kibom'
     dir: 'gerbers'
     options:
@@ -29,6 +30,5 @@ outputs:
             regex: Jumper
       format: 'CSV'
       number: 1
-      output: '%f.%x'
+      output: '%f-%i%v.%x'
       separator: ';'
-
