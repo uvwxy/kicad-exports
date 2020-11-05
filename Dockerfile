@@ -9,7 +9,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY submodules/kicad-git-filters/kicad-git-filters.py /opt/git-filters/
 
-COPY config/*.kibot.yaml /opt/kibot/config/
+COPY config/* /opt/kibot/config/
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

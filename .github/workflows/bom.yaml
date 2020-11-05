@@ -19,20 +19,22 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+
     - name: kicad-exports bom
       uses: ./
       with:
         config: bom.kibot.yaml
-        dir: test
+        dir: test/output
         board: test/test.kicad_pcb
         schema: test/test.sch
     - name: "check output: bom"
       run: |
-        test -f test/docs/bom/test*.html && \
-        test -f test/docs/bom/test*.csv && \
-        test -f test/docs/bom/test*.xlsx
+        test -f test/output/docs/bom/test*.html && \
+        test -f test/output/docs/bom/test*.csv && \
+        test -f test/output/docs/bom/test*.xlsx
+
     - uses: actions/upload-artifact@v2
       if: success()
       with:
         name: bom
-        path: test/docs/bom/*
+        path: test/output/docs/bom/*

@@ -1,0 +1,19 @@
+kibot:
+  version: 1
+
+preflight:
+  update_xml: true
+
+outputs:
+  # For more information: https://github.com/INTI-CMNB/KiBoM
+  - name: 'https://jlcpcb.com/'
+    comment: 'bom.csv - jlcpcb'
+    type: 'kibom'
+    dir: 'docs/bom'
+    options:
+      format: 'CSV'
+      number: 1
+      output: '%f-%i%v.%x'
+      separator: ';'
+      conf:
+        hide_pcb_info: true
