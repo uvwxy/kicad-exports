@@ -1,0 +1,40 @@
+name: lcsc
+
+on:
+  push:
+  branches:
+    - test
+  pull_request:
+  branches:
+    - test
+
+jobs:
+  bom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c lcsc/bom.kibot.yaml
+      uses: ./
+      with:
+        config: lcsc/bom.kibot.yaml
+        dir: test/output/lcsc
+        board: test/test.kicad_pcb
+        schema: test/test.sch
+    - name: "check output: bom"
+      run: |
+        test -f test/output/lcsc/docs/bom/test*.html && \
+        test -f test/output/lcsc/docs/bom/test*.xlsx
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/lcsc/*
+        

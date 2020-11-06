@@ -22,10 +22,10 @@ inputs:
   verbose:
     description: 'enable more output info'
     required: false
-      default: ''
+    #  default: ''
 runs:
   using: 'docker'
-  image: 'docker://nerdyscout/kicad-exports:v2.2'
+  image: 'docker://nerdyscout/kicad-exports:develop'
   args:
     -  -c ${{ inputs.config }}
     -  -d ${{ inputs.dir }}

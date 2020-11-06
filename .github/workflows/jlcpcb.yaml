@@ -1,0 +1,68 @@
+name: jlcpcb
+
+on:
+  push:
+  branches:
+    - test
+  pull_request:
+  branches:
+    - test
+
+jobs:
+  bom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c jlcpcb/bom.kibot.yaml
+      uses: ./
+      with:
+      config: jlcpcb/bom.kibot.yaml
+      dir: test/output/jlcpcb
+      board: test/test.kicad_pcb
+      schema: test/test.sch
+    - name: "check output: bom"
+      run: |
+        test -f test/output/jlcpcb/docs/bom/test*.html && \
+        test -f test/output/jlcpcb/docs/bom/test*.xlsx
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/jlcpcb/docs/*
+
+  position:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: plot
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c position.kibot.yaml
+      uses: ./
+      with:
+        config: jlcpcb/position.kibot.yaml
+        dir: test/output/jlcpcb
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: position"
+      run: |
+        test -f test/output/jlcpcb/gerbers/*pos*.csv
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/jlcpcb/*

@@ -1,70 +1,33 @@
-# sample configurations
+# sample configs
 
-## bom.kibot.yaml
+## default configs
 
-does generate default Bill of Material list
-output:
- - docs/bom/%f.%
+- [bom.kibot.yaml](bom.kibot.yaml)
+  - [docs/bom/test-bom.html](../test/output/docs/bom/test-bom.html)
+  - [docs/bom/test-ibom.html](../test/output/docs/bom/test-ibom.html)
+  - [docs/bom/test-bom.xlsx](../test/output/docs/bom/test-bom.xlsx)
+- [docs.kibot.yaml](docs.kibot.yaml)
+  - [docs/test-Board.pdf](../test/output/docs/test-Board.pdf)
+  - [docs/test-Schematic.pdf](../test/output/docs/test-Schematic.pdf)
+  - [docs/test-Schematic.svg](../test/output/docs/test-Schematic.svg)
+- [gerbers.kibot.yaml](gerbers.kibot.yaml)
+  - [gerbers/test-*.gbr](../test/output/gerbers/)
+- [cad.kibot.yaml](cad.kibot.yaml)
+  - [cad/test.step](../test/output/cad/test.step)
+- [plot.kibot.yaml](plot.kibot.yaml)
+  - [docs/img/test-top.svg](../test/output/docs/img/test-top.svg)
+  - [docs/img/test-bottom.svg](../test/output/docs/img/test-bottom.svg)
+- [position.kibot.yaml](position.kibot.yaml)
+  - [gerbers/test-position.csv](../test/output/gerbers/test-position.csv)
 
-## octopart/bom.kibot.yaml
-does generate Bill of Material which fits the needs of [octopart](https://octopart.com/)
+## specifc configs
 
-output:
- - gerbers/%f_octopart.csv
-
-## docs.kibot.yaml
-does generate schematic and board designs in pdf and svg
-
-output:
- - docs/%f_schematic.pdf
- - docs/%f_schematic.svg
- - docs/%f_board.pdf
-
-## gerbers.kibot.yaml
-does generate gerber and drill files
-
-output:
- - gerbers/%f_*.gbr
- - gerbers/%f_*.drl
-
-## model.kibot.yaml
-does generate 3D CAD file
-
-output:
- - cad/%f.step
-
-## plot.kibot.yaml
-does generate render of front and bottom PCB
-
-output:
- - docs/%f_board_top.svg
- - docs/%f_board_bottom.svg
-
-## oshpark/plot_afterdark.kibot.yaml 
-does generate render of front and bottom PCB
-
-## position.kibot.yaml
-does generate default position file used by pick and place machienes
-
-output:
- - gerbers/%f_position.csv
-
-## position_jlcpcb.kibot.yaml
-does generate position file which fits the needs of [JLCPCB](https://jlcpcb.com/)
-
-output:
- - gerbers/%f_position_jlcpcb.csv
-
-## report.kibot.yaml
-
----
-
-%f original pcb/sch file name without extension.
-%p pcb/sch title from pcb metadata.
-%c company from pcb/sch metadata.
-%r revision from pcb/sch metadata.
-%d pcb/sch date from metadata if available, file modification date otherwise.
-%D date the script was started.
-%T time the script was started.
-%i a contextual ID, depends on the output type.
-%x a suitable extension for the output type.
+- [octopart/bom.kibot.yaml](octopart/bom.kibot.yaml)
+  - [gerbers/test-bom.csv](../test/output/octopart/gerbers/test-bom.csv)
+- [oshpark/plot_afterdark.kibot.yaml](oshpark/plot_afterdark.kibot.yaml)
+  - [docs/img/test-top.svg](../test/output/oshpark/afterdark/docs/img/test-top.svg)
+  - [docs/img/test-bottom.svg](../test/output/oshpark/afterdark/docs/img/test-bottom.svg)
+- [oshpark/plot_purple.kibot.yaml](oshpark/plot_purple.kibot.yaml)
+  - [docs/img/test-top.svg](../test/output/oshpark/purple/docs/img/test-top.svg)
+  - [docs/img/test-bottom.svg](../test/output/oshpark/purple/docs/img/test-bottom.svg)
+- [jlcpcb/position.kibot.yaml](jlcpcb/position.kibot.yaml)

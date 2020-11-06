@@ -1,0 +1,211 @@
+name: default
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - test
+
+jobs:
+  bom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c bom.kibot.yaml
+      uses: ./
+      with:
+        config: bom.kibot.yaml
+        dir: test/output
+        board: test/test.kicad_pcb
+        schema: test/test.sch
+    - name: "check output: bom"
+      run: |
+        test -f test/output/docs/bom/test*.html && \
+        test -f test/output/docs/bom/test*.xlsx
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*
+
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: bom
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c docs.kibot.yaml
+      uses: ./
+      with:
+        config: docs.kibot.yaml
+        dir: test/output
+        board: test/test.kicad_pcb
+        schema: test/test.sch
+    - name: "check output: schematic.svg"
+      run: test -f test/output/docs/test-Schematic*.svg
+    - name: "check output: schematic.pdf"
+      run: test -f test/output/docs/test-Schematic*.pdf
+    - name: "check output: board.pdf"
+      run: test -f test/output/docs/test-Board*.pdf
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*
+
+  gerbers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: docs
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c gerbers.kibot.yaml 
+      uses: ./
+      with:
+        config: fabrications.kibot.yaml
+        dir: test/output
+        board: test/test.kicad_pcb
+        schema: test/test.sch
+    - name: "check output: gerber"
+      run: |
+        test -f test/output/gerbers/*B_CrtYd.gbr && \
+        test -f test/output/gerbers/*F_CrtYd.gbr && \
+        test -f test/output/gerbers/*B_Cu.gbr && \
+        test -f test/output/gerbers/*F_Cu.gbr && \
+        test -f test/output/gerbers/*B_Mask.gbr && \
+        test -f test/output/gerbers/*F_Mask.gbr && \
+        test -f test/output/gerbers/*B_Paste.gbr && \
+        test -f test/output/gerbers/*F_Paste.gbr && \
+        test -f test/output/gerbers/*B_SilkS.gbr && \
+        test -f test/output/gerbers/*F_SilkS.gbr && \
+        test -f test/output/gerbers/*B_CrtYd.gbr && \
+        test -f test/output/gerbers/*F_CrtYd.gbr
+    - name: "check output: gerber"
+      run: |
+        test -f test/output/gerbers/*NPTH*.gbr && \
+        test -f test/output/gerbers/*NPTH*.drl && \
+        test -f test/output/gerbers/*-PTH*.gbr && \
+        test -f test/output/gerbers/*-PTH*.drl
+    - name: "check output: position"
+      run: |
+        test -f test/output/gerbers/*_pos.csv
+    - name: "check output: bom"
+      run: |
+        test -f test/output/gerbers/*_BOM.csv
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*
+
+  plot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: gerbers
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c plot.kibot.yaml
+      uses: ./
+      with:
+        config: plot.kibot.yaml
+        dir: test/output
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: plot"
+      run: |
+        test -f test/output/docs/img/test-top.svg && \
+        test -f test/output/docs/img/test-bottom.svg 
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*
+
+  position:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: plot
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c position.kibot.yaml
+      uses: ./
+      with:
+        config: position.kibot.yaml
+        dir: test/output
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: position"
+      run: |
+        test -f test/output/gerbers/*pos*.csv
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*
+
+  cad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: position
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c cad.kibot.yaml
+      uses: ./
+      with:
+        config: cad.kibot.yaml
+        dir: test/output
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: cad"
+      run: |
+        test -f test/output/cad/*.step
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/*

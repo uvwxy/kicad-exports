@@ -1,0 +1,71 @@
+name: oshpark
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - test
+
+jobs:
+  plot_purple:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: gerbers
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c oshpark/plot_purple.kibot.yaml
+      uses: ./
+      with:
+        config: plot.kibot.yaml
+        dir: test/output/oshpark/purple
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: plot"
+      run: |
+        test -f test/output/docs/img/test-top.svg && \
+        test -f test/output/docs/img/test-bottom.svg 
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+        email: ci@github
+        name: kicad-exports
+        branch: test
+        token: ${{ secrets.MY_SECRET_TOKEN }}
+        force: true
+        files: test/output/oshpark/purple/*
+
+  plot_afterdark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    needs: gerbers
+    steps:
+    - uses: actions/checkout@v2
+      with:
+      submodules: 'recursive'
+    - name: kicad-exports -c oshpark/plot_afterdark.kibot.yaml
+      uses: ./
+      with:
+        config: plot.kibot.yaml
+        dir: test/output/oshpark/afterdark
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: plot"
+      run: |
+        test -f test/output/docs/img/test-top.svg && \
+        test -f test/output/docs/img/test-bottom.svg 
+    - name: git commit && git push 
+      uses: actions-x/commit@v2
+      with:
+          email: ci@github
+          name: kicad-exports
+          branch: test
+          token: ${{ secrets.MY_SECRET_TOKEN }}
+          force: true
+          files: test/output/oshpark/afterdark/*
+      

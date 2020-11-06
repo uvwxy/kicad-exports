@@ -6,10 +6,10 @@ preflight:
 
 outputs:
   # For more information: https://github.com/INTI-CMNB/KiBoM
-  - name: 'https://octopart.com/'
-    comment: 'bom.csv - octopart'
+  - name: 'https://lcsc.com/'
+    comment: 'bom.csv - lcsc'
     type: 'kibom'
-    dir: 'gerbers'
+    dir: 'docs/bom'
     options:
       # [string|dict] BoM configuration file, relative to PCB.
       # You can also define the configuration here, will be stored in `config.kibom.ini`
@@ -23,12 +23,15 @@ outputs:
           # join: ''
           # [string=''] Name to display in the header. The field is used when empty
           # name: ''
-          - Description
-          - Part
-          - References
+          - field: Description
+            name: Reference
           - Value
+          - field: Footprint
+            name: Package
           - field: Quantity Per PCB
-            name: Qty
+            name: Quantity
+#          - field: mpn
+#            name: Manufacture Part Number
         # [list(list(string))] A series of values which are considered to be equivalent for the part name.
         # Each entry is a list of equivalen names. Example: ['c', 'c_small', 'cap' ]
         # will ensure the equivalent capacitor symbols can be grouped together.
@@ -116,7 +119,7 @@ outputs:
       # [string='%f-%i%v.%x'] filename for the output (%i=bom). Affected by global options
       output: '%f-%i%v.%x'
       # [string=','] CSV Separator
-      separator: ';'
+      separator: ','
       # [string=''] Board variant(s), used to determine which components
       # are output to the BoM. To specify multiple variants,
       # with a BOM file exported for each variant, separate
