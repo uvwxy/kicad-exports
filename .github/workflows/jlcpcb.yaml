@@ -2,11 +2,11 @@ name: jlcpcb
 
 on:
   push:
-  branches:
-    - test
+    branches:
+      - test
   pull_request:
-  branches:
-    - test
+    branches:
+      - test
 
 jobs:
   bom:
@@ -20,10 +20,10 @@ jobs:
     - name: kicad-exports -c jlcpcb/bom.kibot.yaml
       uses: ./
       with:
-      config: jlcpcb/bom.kibot.yaml
-      dir: test/output/jlcpcb
-      board: test/test.kicad_pcb
-      schema: test/test.sch
+        config: jlcpcb/bom.kibot.yaml
+        dir: test/output/jlcpcb
+        board: test/test.kicad_pcb
+        schema: test/test.sch
     - name: "check output: bom"
       run: |
         test -f test/output/jlcpcb/docs/bom/test*.html && \

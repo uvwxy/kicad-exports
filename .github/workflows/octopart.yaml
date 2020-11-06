@@ -2,11 +2,11 @@ name: octopart
 
 on:
   push:
-  branches:
-    - test
+    branches:
+      - test
   pull_request:
-  branches:
-    - test
+    branches:
+      - test
 
 jobs:
   bom:
