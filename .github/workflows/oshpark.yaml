@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     continue-on-error: true
-    needs: gerbers
     steps:
     - uses: actions/checkout@v2
       with:
@@ -43,7 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     continue-on-error: true
-    needs: gerbers
     steps:
     - uses: actions/checkout@v2
       with:

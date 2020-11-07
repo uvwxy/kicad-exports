@@ -42,7 +42,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     continue-on-error: true
-    needs: plot
     steps:
     - uses: actions/checkout@v2
       with:

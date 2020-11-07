@@ -123,7 +123,7 @@ function args_process {
     do
         case "$1" in
             -c | --config ) shift
-                CONFIG="$@"
+                CONFIG="$1"
                 ;;
             -b | --board ) shift
                 BOARD="-b $1"
@@ -151,10 +151,10 @@ function args_process {
                 version
                 exit
                 ;;
-#            *)
-#                illegal_arg "$@"
-#                exit $EXIT_ERROR
-#                ;;
+            *)
+                illegal_arg "$@"
+                exit $EXIT_ERROR
+                ;;
         esac
         shift
     done
@@ -170,19 +170,20 @@ function run {
         fi
     fi
 
-    for conf in $CONFIG; do
-        if [ -f $conf ]; then
-            echo "running: kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
-            kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+#    for conf in $CONFIG; do
+#        echo "running: $conf"
+        if [ -f $CONFIG ]; then
+            echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+            kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
         elif [ -f "/opt/kibot/config/$conf" ]; then
-            echo "running: kibot -c $conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
-            kibot -c /opt/kibot/config/$conf $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+            echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+            kibot -c /opt/kibot/config/$CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
         else
-            echo "config file '$conf' not found! Please pass own file or choose from:"
+            echo "config file '$CONFIG' not found! Please pass own file or choose from:"
             ls /opt/kibot/config/*.yaml
             exit $EXIT_ERROR
         fi
-    done
+#    done
 }
 
 function main {
