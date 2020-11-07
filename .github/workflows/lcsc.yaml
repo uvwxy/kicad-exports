@@ -3,10 +3,10 @@ name: lcsc
 on:
   push:
     branches:
-      - test
+      - develop
   pull_request:
     branches:
-      - test
+      - develop
 
 jobs:
   bom:
