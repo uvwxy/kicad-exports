@@ -20,7 +20,7 @@ jobs:
     - name: kicad-exports -c octopart/bom.kibot.yaml
       uses: ./
       with:
-        config: octopart/bom.kibot.yaml
+        config: config/octopart/bom.kibot.yaml
         dir: test/output/octopart
         board: test/test.kicad_pcb
         schema: test/test.sch

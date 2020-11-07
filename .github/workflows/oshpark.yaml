@@ -20,7 +20,7 @@ jobs:
     - name: kicad-exports -c oshpark/plot_purple.kibot.yaml
       uses: ./
       with:
-        config: plot.kibot.yaml
+        config: config/plot.kibot.yaml
         dir: test/output/oshpark/purple
         schema: test/test.sch
         board: test/test.kicad_pcb
@@ -49,7 +49,7 @@ jobs:
     - name: kicad-exports -c oshpark/plot_afterdark.kibot.yaml
       uses: ./
       with:
-        config: plot.kibot.yaml
+        config: config/plot.kibot.yaml
         dir: test/output/oshpark/afterdark
         schema: test/test.sch
         board: test/test.kicad_pcb

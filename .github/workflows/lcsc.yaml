@@ -20,7 +20,7 @@ jobs:
     - name: kicad-exports -c lcsc/bom.kibot.yaml
       uses: ./
       with:
-        config: lcsc/bom.kibot.yaml
+        config: config/lcsc/bom.kibot.yaml
         dir: test/output/lcsc
         board: test/test.kicad_pcb
         schema: test/test.sch

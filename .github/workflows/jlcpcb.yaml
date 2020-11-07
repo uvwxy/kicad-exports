@@ -20,7 +20,7 @@ jobs:
     - name: kicad-exports -c jlcpcb/bom.kibot.yaml
       uses: ./
       with:
-        config: jlcpcb/bom.kibot.yaml
+        config: config/jlcpcb/bom.kibot.yaml
         dir: test/output/jlcpcb
         board: test/test.kicad_pcb
         schema: test/test.sch
@@ -49,7 +49,7 @@ jobs:
     - name: kicad-exports -c position.kibot.yaml
       uses: ./
       with:
-        config: jlcpcb/position.kibot.yaml
+        config: config/jlcpcb/position.kibot.yaml
         dir: test/output/jlcpcb
         schema: test/test.sch
         board: test/test.kicad_pcb

@@ -20,7 +20,7 @@ jobs:
     - name: kicad-exports -c bom.kibot.yaml
       uses: ./
       with:
-        config: bom.kibot.yaml
+        config: config/bom.kibot.yaml
         dir: test/output
         board: test/test.kicad_pcb
         schema: test/test.sch
@@ -50,7 +50,7 @@ jobs:
     - name: kicad-exports -c docs.kibot.yaml
       uses: ./
       with:
-        config: docs.kibot.yaml
+        config: config/docs.kibot.yaml
         dir: test/output
         board: test/test.kicad_pcb
         schema: test/test.sch
@@ -82,7 +82,7 @@ jobs:
     - name: kicad-exports -c gerbers.kibot.yaml 
       uses: ./
       with:
-        config: fabrications.kibot.yaml
+        config: config/fabrications.kibot.yaml
         dir: test/output
         board: test/test.kicad_pcb
         schema: test/test.sch
@@ -134,7 +134,7 @@ jobs:
     - name: kicad-exports -c plot.kibot.yaml
       uses: ./
       with:
-        config: plot.kibot.yaml
+        config: config/plot.kibot.yaml
         dir: test/output
         schema: test/test.sch
         board: test/test.kicad_pcb
@@ -164,7 +164,7 @@ jobs:
     - name: kicad-exports -c position.kibot.yaml
       uses: ./
       with:
-        config: position.kibot.yaml
+        config: config/position.kibot.yaml
         dir: test/output
         schema: test/test.sch
         board: test/test.kicad_pcb
@@ -193,7 +193,7 @@ jobs:
     - name: kicad-exports -c cad.kibot.yaml
       uses: ./
       with:
-        config: cad.kibot.yaml
+        config: config/cad.kibot.yaml
         dir: test/output
         schema: test/test.sch
         board: test/test.kicad_pcb
