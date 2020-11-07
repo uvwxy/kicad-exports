@@ -161,6 +161,8 @@ function args_process {
 }
 
 function run {
+    CONFIG="$(echo "$CONFIG" | tr -d '[:space:]')"
+
     if [ -d .git ]; then
         filter="/opt/git-filters/kicad-git-filters.py"
         if [ -f $filter ]; then
@@ -170,20 +172,17 @@ function run {
         fi
     fi
 
-#    for conf in $CONFIG; do
-#        echo "running: $conf"
-        if [ -f $CONFIG ]; then
-            echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
-            kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
-        elif [ -f "/opt/kibot/config/$conf" ]; then
-            echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
-            kibot -c /opt/kibot/config/$CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
-        else
-            echo "config file '$CONFIG' not found! Please pass own file or choose from:"
-            ls /opt/kibot/config/*.yaml
-            exit $EXIT_ERROR
-        fi
-#    done
+    if [ -f $CONFIG ]; then
+        echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+        kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+    elif [ -f "/opt/kibot/config/$conf" ]; then
+        echo "running: kibot -c $CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE"
+        kibot -c /opt/kibot/config/$CONFIG $DIR $BOARD $SCHEMA $SKIP $OVERWRITE $VERBOSE
+    else
+        echo "config file '$CONFIG' not found! Please pass own file or choose from:"
+        ls /opt/kibot/config/*.yaml
+        exit $EXIT_ERROR
+    fi
 }
 
 function main {
