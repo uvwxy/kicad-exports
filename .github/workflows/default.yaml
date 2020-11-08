@@ -29,6 +29,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/docs/bom/* 
@@ -65,6 +66,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/docs/*
@@ -106,7 +108,7 @@ jobs:
         test -f test/output/gerbers/*F_SilkS.gbr && \
         test -f test/output/gerbers/*B_CrtYd.gbr && \
         test -f test/output/gerbers/*F_CrtYd.gbr
-    - name: "check output: gerber"
+    - name: "check output: drills"
       run: |
         test -f test/output/gerbers/*NPTH_drill.gbr && \
         test -f test/output/gerbers/*NPTH_drill.drl && \
@@ -115,6 +117,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
@@ -149,6 +152,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/docs/img/*
@@ -182,6 +186,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
@@ -215,6 +220,7 @@ jobs:
     - name: git commit
       if: ${{ success() }}
       run: |
+        rm .gitattributes .gitconfig
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git stage test/output/cad/*
