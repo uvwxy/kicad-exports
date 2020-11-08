@@ -32,6 +32,7 @@ jobs:
         name: 'GitHub Actions'
         email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
+        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/purple/*
 
   plot_afterdark:
@@ -61,5 +62,6 @@ jobs:
         name: 'GitHub Actions'
         email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
+        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/afterdark/*
     
