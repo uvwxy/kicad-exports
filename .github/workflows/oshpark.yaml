@@ -33,7 +33,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/oshpark/purple/*
         git commit -m "Add changes" -a
-        git pull --rebase
+        git reset HEAD^1
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -67,7 +67,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/oshpark/afterdark/*
         git commit -m "Add changes" -a
-        git pull --rebase
+        git reset HEAD^1
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
