@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - broken/own-git
 
 jobs:
   bom:
@@ -28,7 +29,7 @@ jobs:
         test -f test/output/docs/bom/*-bom.xlsx
     - name: git commit && git push
       if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -61,7 +62,7 @@ jobs:
 #    - name: "check output: board.pdf"
 #      run: test -f test/output/docs/*-board.pdf
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -108,7 +109,7 @@ jobs:
         test -f test/output/gerbers/*PTH_drill.gbr && \
         test -f test/output/gerbers/*PTH_drill.drl
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -139,7 +140,7 @@ jobs:
         test -f test/output/docs/img/test-top.svg && \
         test -f test/output/docs/img/test-bottom.svg 
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -169,7 +170,7 @@ jobs:
       run: |
         test -f test/output/gerbers/*pos*.csv
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -200,7 +201,7 @@ jobs:
         test -f test/output/cad/*.step
     - name: git commit && git push
       if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'

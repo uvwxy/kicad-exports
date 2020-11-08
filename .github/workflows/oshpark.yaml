@@ -26,7 +26,7 @@ jobs:
         test -f test/output/oshpark/purple/docs/img/*-top.svg && \
         test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
@@ -57,7 +57,7 @@ jobs:
         test -f test/output/oshpark/purple/docs/img/*-top.svg && \
         test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
