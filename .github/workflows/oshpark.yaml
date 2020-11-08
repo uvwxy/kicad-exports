@@ -34,12 +34,8 @@ jobs:
         git stage test/output/oshpark/purple/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: 
+        git pull --rebase
+        git push
 
   plot_afterdark:
     runs-on: ubuntu-latest
@@ -69,10 +65,5 @@ jobs:
         git stage test/output/oshpark/afterdark/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: 
-    
+        git pull --rebase
+        git push

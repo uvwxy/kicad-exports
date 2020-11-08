@@ -35,12 +35,8 @@ jobs:
         git stage test/output/docs/bom/* 
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/docs/bom/* 
+        git pull --rebase
+        git push
 
   docs:
     runs-on: ubuntu-latest
@@ -72,12 +68,8 @@ jobs:
         git stage test/output/docs/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/docs/*
+        git pull --rebase
+        git push
 
   gerbers:
     runs-on: ubuntu-latest
@@ -123,12 +115,8 @@ jobs:
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/gerbers/*
+        git pull --rebase
+        git push
 
   plot:
     runs-on: ubuntu-latest
@@ -158,12 +146,8 @@ jobs:
         git stage test/output/docs/img/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/docs/img/*
+        git pull --rebase
+        git push
 
   position:
     runs-on: ubuntu-latest
@@ -192,12 +176,8 @@ jobs:
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/gerbers/*
+        git pull --rebase
+        git push
 
   cad:
     runs-on: ubuntu-latest
@@ -226,9 +206,5 @@ jobs:
         git stage test/output/cad/*
         git commit -m "Add changes" -a
         git reset HEAD^1
-    - name: git push
-      if: ${{ success() }}
-      uses: github-actions-x/commit@v2.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        files: test/output/cad/*
+        git pull --rebase
+        git push
