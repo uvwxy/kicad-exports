@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c jlcpcb/bom.kibot.yaml
       uses: ./
       with:
@@ -42,6 +43,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c position.kibot.yaml
       uses: ./
       with:

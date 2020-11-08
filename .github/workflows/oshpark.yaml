@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c oshpark/plot_purple.kibot.yaml
       uses: ./
       with:
@@ -43,6 +44,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c oshpark/plot_afterdark.kibot.yaml
       uses: ./
       with:
