@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c oshpark/plot_purple.kibot.yaml
       uses: ./
       with:
@@ -25,14 +26,13 @@ jobs:
         test -f test/output/oshpark/purple/docs/img/*-top.svg && \
         test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
+        rebase: 'true'
         name: 'GitHub Actions'
         email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/purple/*
 
   plot_afterdark:
@@ -43,6 +43,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c oshpark/plot_afterdark.kibot.yaml
       uses: ./
       with:
@@ -52,16 +53,15 @@ jobs:
         board: test/test.kicad_pcb
     - name: "check output: plot"
       run: |
-        test -f test/output/oshpark/purple/docs/img/*-top.svg && \
-        test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
+        test -f test/output/oshpark/afterdark/docs/img/*-top.svg && \
+        test -f test/output/oshpark/afterdark/docs/img/*-bottom.svg 
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
+        rebase: 'true'
         name: 'GitHub Actions'
         email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/afterdark/*
     

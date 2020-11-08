@@ -8,7 +8,7 @@
 - [docs.kibot.yaml](docs.kibot.yaml)
   - [docs/test-board.pdf](../test/output/docs/test-board.pdf)
   - [docs/test-schematic.pdf](../test/output/docs/test-schematic.pdf)
-  - [docs/test-schematic.svg](../test/output/docs/test-schematic.svg)
+  - [docs/img/test-schematic.svg](../test/output/docs/img/test-schematic.svg)
 - [gerbers.kibot.yaml](gerbers.kibot.yaml)
   - [gerbers/test-*.gbr](../test/output/gerbers/)
 - [cad.kibot.yaml](cad.kibot.yaml)
@@ -34,3 +34,7 @@
 [![jlcpcb config](https://github.com/nerdyscout/kicad-exports/workflows/jlcpcb/badge.svg)](https://github.com/nerdyscout/kicad-exports/actions?query=workflow%3Ajlcpcb)
 - [jlcpcb/position.kibot.yaml](jlcpcb/position.kibot.yaml)
   - [gerbers/test-bom.csv](../test/output/jlcpcb/gerbers/test-bom.csv)
+
+[![lcsc config](https://github.com/nerdyscout/kicad-exports/workflows/lcsc/badge.svg)](https://github.com/nerdyscout/kicad-exports/actions?query=workflow%3Alcsc)
+- [lcsc/bom.kibot.yaml](lcsc/bom.kibot.yaml)
+  - [gerbers/test-bom.csv](../test/output/lcsc/gerbers/test-bom.csv)

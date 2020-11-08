@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
+        fetch-depth: 0
     - name: kicad-exports -c octopart/bom.kibot.yaml
       uses: ./
       with:
@@ -24,13 +25,12 @@ jobs:
       run: |
         test -f test/output/octopart/gerbers/test*.csv
     - name: git commit && git push 
-      uses: github-actions-x/commit@v2.7
+      uses: nerdyscout/commit@patch-1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
+        rebase: 'true'
         name: 'GitHub Actions'
         email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/octopart/gerbers/*
         
