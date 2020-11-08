@@ -1,6 +1,10 @@
 kibot:
   version: 1
 
+global:
+  output: '%f_rev%r-%i.%x'
+  variant: ''
+
 preflight:
   update_xml: false
   run_drc: true

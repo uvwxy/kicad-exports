@@ -1,6 +1,6 @@
 FROM setsoft/kicad_auto:10.4-5.1.6
 LABEL MAINTAINER nerdyscout <nerdyscout@posteo.de>
-LABEL Description="export various files from KiCad projects"
+LABEL DESCRIPTION="export various files from KiCad projects"
 LABEL VERSION="v2.2"
 
 RUN apt-get update 

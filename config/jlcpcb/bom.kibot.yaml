@@ -5,11 +5,10 @@ preflight:
   update_xml: true
 
 outputs:
-  # For more information: https://github.com/INTI-CMNB/KiBoM
   - name: 'https://jlcpcb.com/'
     comment: 'bom.csv - jlcpcb'
     type: 'kibom'
-    dir: 'docs/bom'
+    dir: 'gerbers'
     options:
       format: 'CSV'
       number: 1
