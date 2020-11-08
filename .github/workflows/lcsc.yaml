@@ -32,6 +32,6 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/lcsc/gerbers/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push

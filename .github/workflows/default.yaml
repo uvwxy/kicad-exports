@@ -34,7 +34,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/bom/* 
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
 
@@ -67,7 +67,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
 
@@ -114,7 +114,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
 
@@ -145,7 +145,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/img/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
 
@@ -175,7 +175,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
 
@@ -205,6 +205,6 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/cad/*
         git commit -m "Add changes" -a
-        git reset HEAD^1
+        git restore .
         git pull --rebase
         git push
