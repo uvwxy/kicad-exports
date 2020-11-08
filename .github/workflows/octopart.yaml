@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - broken/github-push-action
 
 jobs:
   bom:
@@ -37,5 +38,4 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
         

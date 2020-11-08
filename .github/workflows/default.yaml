@@ -40,7 +40,6 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
 
   docs:
     runs-on: ubuntu-latest
@@ -77,7 +76,6 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
 
   gerbers:
     runs-on: ubuntu-latest
@@ -128,7 +126,6 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
 
   plot:
     runs-on: ubuntu-latest
@@ -163,7 +160,6 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
 
   position:
     runs-on: ubuntu-latest
@@ -197,7 +193,6 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop
 
   cad:
     runs-on: ubuntu-latest
