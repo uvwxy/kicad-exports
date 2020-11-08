@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - broken/github-push-action
+      - broken/manual-git
 
 jobs:
   bom:
