@@ -63,7 +63,7 @@ jobs:
       if: ${{ success() }}
       with:
         base: develop
-      - name: git commit && git push
+    - name: git commit && git push
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
