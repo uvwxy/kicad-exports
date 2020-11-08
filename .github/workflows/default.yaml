@@ -40,6 +40,7 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: test/output/docs/bom/* 
 
   docs:
     runs-on: ubuntu-latest
@@ -76,6 +77,7 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: test/output/docs/*
 
   gerbers:
     runs-on: ubuntu-latest
@@ -126,6 +128,7 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: test/output/gerbers/*
 
   plot:
     runs-on: ubuntu-latest
@@ -160,6 +163,7 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: test/output/docs/img/*
 
   position:
     runs-on: ubuntu-latest
@@ -193,6 +197,7 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        files: test/output/gerbers/*
 
   cad:
     runs-on: ubuntu-latest
@@ -226,5 +231,4 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        branch: develop        
-
+        files: test/output/cad/*
