@@ -1,0 +1,35 @@
+name: lcsc
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  bom:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c lcsc/bom.kibot.yaml
+      uses: ./
+      with:
+        config: config/lcsc/bom.kibot.yaml
+        dir: test/output/lcsc
+        board: test/test.kicad_pcb
+        schema: test/test.sch
+    - name: "check output: bom"
+      run: |
+        test -f test/output/lcsc/gerbers/test*.csv
+    - name: git commit && git push 
+      uses: github-actions-x/commit@v2.7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        rebase: 'true'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
+        commit-message: ${{ github.workflow }} ${{ github.job }}
+        files: test/output/lcsc/gerbers/*
+        

@@ -1,0 +1,65 @@
+name: oshpark
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  plot_purple:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c oshpark/plot_purple.kibot.yaml
+      uses: ./
+      with:
+        config: config/plot.kibot.yaml
+        dir: test/output/oshpark/purple
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: plot"
+      run: |
+        test -f test/output/oshpark/purple/docs/img/*-top.svg && \
+        test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
+    - name: git commit && git push 
+      uses: github-actions-x/commit@v2.7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        rebase: 'true'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
+        commit-message: ${{ github.workflow }} ${{ github.job }}
+        files: test/output/oshpark/purple/*
+
+  plot_afterdark:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: plot_purple
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: kicad-exports -c oshpark/plot_afterdark.kibot.yaml
+      uses: ./
+      with:
+        config: config/plot.kibot.yaml
+        dir: test/output/oshpark/afterdark
+        schema: test/test.sch
+        board: test/test.kicad_pcb
+    - name: "check output: plot"
+      run: |
+        test -f test/output/oshpark/purple/docs/img/*-top.svg && \
+        test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
+    - name: git commit && git push 
+      uses: github-actions-x/commit@v2.7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        rebase: 'true'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
+        commit-message: ${{ github.workflow }} ${{ github.job }}
+        files: test/output/oshpark/afterdark/*
+    
