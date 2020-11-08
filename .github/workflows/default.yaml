@@ -32,8 +32,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/docs/bom/*
@@ -65,8 +65,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/docs/*
@@ -112,8 +112,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/gerbers/*
@@ -143,8 +143,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/docs/img/*
@@ -173,8 +173,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/gerbers/*
@@ -204,8 +204,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/cad/*

@@ -29,8 +29,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/jlcpcb/gerbers/*
@@ -59,8 +59,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-#        name: 'GitHub Actions'
-#        email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
 #        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/jlcpcb/gerbers/*
