@@ -24,16 +24,20 @@ jobs:
       run: |
         test -f test/output/oshpark/purple/docs/img/*-top.svg && \
         test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/oshpark/purple/*
+        git commit -m "Add changes" -a
+        git pull --rebase
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/oshpark/purple/*
+        branch: develop
 
   plot_afterdark:
     runs-on: ubuntu-latest
@@ -54,14 +58,18 @@ jobs:
       run: |
         test -f test/output/oshpark/purple/docs/img/*-top.svg && \
         test -f test/output/oshpark/purple/docs/img/*-bottom.svg 
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/oshpark/afterdark/*
+        git commit -m "Add changes" -a
+        git pull --rebase
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/oshpark/afterdark/*
+        branch: develop
     

@@ -23,16 +23,20 @@ jobs:
     - name: "check output: bom"
       run: |
         test -f test/output/jlcpcb/gerbers/test*.csv
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/jlcpcb/gerbers/*
+        git commit -m "Add changes" -a
+        git pull --rebase
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/jlcpcb/gerbers/*
+        branch: develop
 
   position:
     runs-on: ubuntu-latest
@@ -52,13 +56,17 @@ jobs:
     - name: "check output: position"
       run: |
         test -f test/output/jlcpcb/gerbers/test*pos.csv
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/jlcpcb/gerbers/*
+        git commit -m "Add changes" -a
+        git pull --rebase
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/jlcpcb/gerbers/*
+        branch: develop

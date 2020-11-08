@@ -33,6 +33,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/bom/* 
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -68,6 +69,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/*
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -117,6 +119,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -150,6 +153,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/docs/img/*
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -182,6 +186,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/gerbers/*
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -207,11 +212,6 @@ jobs:
     - name: "check output: cad"
       run: |
         test -f test/output/cad/*.step
-    - name: commit
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m "Add changes" -a
     - name: git commit
       if: ${{ success() }}
       run: |
@@ -219,6 +219,7 @@ jobs:
         git config --local user.name "GitHub Action"
         git stage test/output/cad/*
         git commit -m "Add changes" -a
+        git pull --rebase
     - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
