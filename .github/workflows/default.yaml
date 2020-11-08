@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - broken/github-push-action
 
 jobs:
   bom:
@@ -25,17 +26,19 @@ jobs:
         test -f test/output/docs/bom/*-bom.html && \
         test -f test/output/docs/bom/*-ibom.html && \
         test -f test/output/docs/bom/*-bom.xlsx
-    - name: git commit && git push
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/docs/bom/* 
+        git commit -m "Add changes" -a
+    - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/docs/bom/*
+        branch: develop
 
   docs:
     runs-on: ubuntu-latest
@@ -58,16 +61,19 @@ jobs:
       run: test -f test/output/docs/*-schematic.pdf
 #    - name: "check output: board.pdf"
 #      run: test -f test/output/docs/*-board.pdf
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/docs/*
+        git commit -m "Add changes" -a
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/docs/*
+        branch: develop
 
   gerbers:
     runs-on: ubuntu-latest
@@ -104,16 +110,19 @@ jobs:
         test -f test/output/gerbers/*NPTH_drill.drl && \
         test -f test/output/gerbers/*PTH_drill.gbr && \
         test -f test/output/gerbers/*PTH_drill.drl
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/gerbers/*
+        git commit -m "Add changes" -a
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/gerbers/*
+        branch: develop
 
   plot:
     runs-on: ubuntu-latest
@@ -134,16 +143,19 @@ jobs:
       run: |
         test -f test/output/docs/img/test-top.svg && \
         test -f test/output/docs/img/test-bottom.svg 
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/docs/img/*
+        git commit -m "Add changes" -a
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/docs/img/*
+        branch: develop
 
   position:
     runs-on: ubuntu-latest
@@ -163,16 +175,19 @@ jobs:
     - name: "check output: position"
       run: |
         test -f test/output/gerbers/*pos*.csv
-    - name: git commit && git push 
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/gerbers/*
+        git commit -m "Add changes" -a
+    - name: git push
+      if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/gerbers/*
+        branch: develop
 
   cad:
     runs-on: ubuntu-latest
@@ -192,14 +207,22 @@ jobs:
     - name: "check output: cad"
       run: |
         test -f test/output/cad/*.step
-    - name: git commit && git push
+    - name: commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Add changes" -a
+    - name: git commit
+      if: ${{ success() }}
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git stage test/output/cad/*
+        git commit -m "Add changes" -a
+    - name: git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
-        commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
-        files: test/output/cad/*
+        branch: develop        
+
