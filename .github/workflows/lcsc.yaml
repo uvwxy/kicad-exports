@@ -28,8 +28,8 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         rebase: 'true'
-        commit_user_name: 'GitHub Actions'
-        commit_user_email: 'actions@github.com'
+        name: 'GitHub Actions'
+        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
         files: test/output/lcsc/gerbers/*
         
