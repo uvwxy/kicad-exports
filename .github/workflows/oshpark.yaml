@@ -29,11 +29,11 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
+        rebase: 'true'
+#        name: 'GitHub Actions'
+#        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
+#        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/purple/*
 
   plot_afterdark:
@@ -60,10 +60,10 @@ jobs:
       uses: github-actions-x/commit@v2.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        rebase: 'false'
-        name: 'GitHub Actions'
-        email: 'actions@github.com'
+        rebase: 'true'
+#        name: 'GitHub Actions'
+#        email: 'actions@github.com'
         commit-message: ${{ github.workflow }} ${{ github.job }}
-        push-branch: test/${{ github.workflow }}-${{ github.job }}
+#        push-branch: test/${{ github.workflow }}-${{ github.job }}
         files: test/output/oshpark/afterdark/*
     
