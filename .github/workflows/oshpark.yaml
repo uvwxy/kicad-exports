@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - develop
+      - broken/no_rebase
 
 jobs:
   plot_purple:
