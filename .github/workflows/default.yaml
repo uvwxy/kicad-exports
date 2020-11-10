@@ -26,6 +26,8 @@ jobs:
         test -f test/output/docs/bom/*-bom.html && \
         test -f test/output/docs/bom/*-ibom.html && \
         test -f test/output/docs/bom/*-bom.xlsx
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
@@ -58,6 +60,8 @@ jobs:
       run: test -f test/output/docs/*-schematic.pdf
 #    - name: "check output: board.pdf"
 #      run: test -f test/output/docs/*-board.pdf
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push 
       uses: github-actions-x/commit@v2.7
       with:
@@ -103,6 +107,8 @@ jobs:
         test -f test/output/gerbers/*NPTH_drill.drl && \
         test -f test/output/gerbers/*PTH_drill.gbr && \
         test -f test/output/gerbers/*PTH_drill.drl
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push 
       uses: github-actions-x/commit@v2.7
       with:
@@ -132,6 +138,8 @@ jobs:
       run: |
         test -f test/output/docs/img/test-top.svg && \
         test -f test/output/docs/img/test-bottom.svg 
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push 
       uses: github-actions-x/commit@v2.7
       with:
@@ -160,6 +168,8 @@ jobs:
     - name: "check output: position"
       run: |
         test -f test/output/gerbers/*pos*.csv
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push 
       uses: github-actions-x/commit@v2.7
       with:
@@ -188,6 +198,8 @@ jobs:
     - name: "check output: cad"
       run: |
         test -f test/output/cad/*.step
+    - name: git dirty check
+      run: git status -s
     - name: git commit && git push
       if: ${{ success() }}
       uses: github-actions-x/commit@v2.7
